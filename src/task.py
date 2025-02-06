@@ -7,7 +7,7 @@ class Task:
 
     id: A unique identifier for the task
     description: A short description of the task
-    status: The status of the task (todo, in-progress, done)
+    status: The status of the task (todo, prog, done)
     createdAt: The date and time when the task was created
     updatedAt: The date and time when the task was last updated
 
@@ -27,10 +27,11 @@ class Task:
     @property
     def status(self):
         return self._status
+    
 
     @status.setter
     def status(self, value):
-        if value not in ["todo", "in-progress", "done"]:
+        if value not in ["todo", "prog", "done"]:
             raise ValueError("Invalid status")
         self._status = value
         self.updatedAt = datetime.now()

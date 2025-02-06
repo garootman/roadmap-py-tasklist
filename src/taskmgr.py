@@ -66,7 +66,7 @@ class TaskManager:
         # Mark a task as in progress
         task = self.get_task(task_id)
         if task:
-            task.status = "in-progress"
+            task.status = "prog"
             self.__save_tasks(self.tasks)
             return task
         return None

@@ -43,7 +43,7 @@ def test_create_task_invalid_status():
 
 def test_create_task_correct_statuses():
     Task(id=1, description="Buy groceries", status="todo")
-    Task(id=1, description="Buy groceries", status="in-progress")
+    Task(id=1, description="Buy groceries", status="prog")
     Task(id=1, description="Buy groceries", status="done")
 
 

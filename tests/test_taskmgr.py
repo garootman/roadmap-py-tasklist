@@ -16,8 +16,8 @@ def manytasks():
     mt = [
         ("buy groceries", "todo"),
         ("cook dinner", "todo"),
-        ("do laundry", "in-progress"),
-        ("clean house", "in-progress"),
+        ("do laundry", "prog"),
+        ("clean house", "prog"),
         ("study", "done"),
         ("workout", "done"),
     ]
@@ -57,9 +57,9 @@ def test_update_task(taskman):
 def test_update_task_status(taskman):
     task = taskman.add_task(description="Buy groceries")
     task = taskman.mark_in_progress(1)
-    assert task.status == "in-progress"
+    assert task.status == "prog"
     task = taskman.get_task(1)
-    assert task.status == "in-progress"
+    assert task.status == "prog"
     
     task = taskman.mark_done(1)
     assert task.status == "done"
@@ -95,7 +95,7 @@ def test_list_tasks(taskman, manytasks):
     for desc, status in manytasks:
         nt = taskman.add_task(description=desc)
         nt_id = nt.id
-        if status == "in-progress":
+        if status == "prog":
             taskman.mark_in_progress(nt_id)
         elif status == "done":
             taskman.mark_done(nt_id)
@@ -109,8 +109,8 @@ def test_list_tasks(taskman, manytasks):
     tasks_todo = taskman.list_tasks(status="todo")
     assert len(tasks_todo) == len([t for t in manytasks if t[1] == "todo"])
     
-    tasks_in_progress = taskman.list_tasks(status="in-progress")
-    assert len(tasks_in_progress) == len([t for t in manytasks if t[1] == "in-progress"])
+    tasks_in_progress = taskman.list_tasks(status="prog")
+    assert len(tasks_in_progress) == len([t for t in manytasks if t[1] == "prog"])
     
     
 

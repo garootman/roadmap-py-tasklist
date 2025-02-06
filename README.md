@@ -1,47 +1,37 @@
 # roadmap-py-tasklist
-CLI app to make some tasks in a list
+
+CLI app to make some tasks in a list due to [roadmap.sh project](https://roadmap.sh/projects/task-tracker)
+
+The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. 
+
+## isntallation
+
+- Download this repository, unzip
+- Open terminal | cmd
+- add ./src to PYTHONPATH env var by `export`
+- run commands according to usage section below
 
 
-The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. The user should be able to:
 
-    - Add, Update, and Delete tasks
-    - Mark a task as in progress or done
-    - List all tasks
-    - List all tasks that are done
-    - List all tasks that are not done
-    - List all tasks that are in progress
+## Usage
 
+``` bash
+# adding a new tasks
+python main.py add "task description"
 
-Here are some constraints to guide the implementation:
-    - You can use any programming language to build this project.
-    - Use positional arguments in command line to accept user inputs.
-    - Use a JSON file to store the tasks in the current directory.
-    - The JSON file should be created if it does not exist.
-    - Use the native file system module of your programming language to interact with the JSON file.
-    - Do not use any external libraries or frameworks to build this project.
-    - Ensure to handle errors and edge cases gracefully.
+# updating task description
+python main.py update "_new_ task description"
 
+# delete task
+python main.py delte 1 
 
-## example usage
-```bash
-# Adding a new task
-task-cli add "Buy groceries"
-# Output: Task added successfully (ID: 1)
+# change task status to one of: 
+python main.py <status> 1  # status values are: todo, prog, done
 
-# Updating and deleting tasks
-task-cli update 1 "Buy groceries and cook dinner"
-task-cli delete 1
+# listing all tasks
+python main.py list 
 
-# Marking a task as in progress or done
-task-cli mark-in-progress 1
-task-cli mark-done 1
-
-# Listing all tasks
-task-cli list
-
-# Listing tasks by status
-task-cli list done
-task-cli list todo
-task-cli list in-progress
+# listing tasks in status
+python main.py list <status> # todo | prog | done
 ```
 

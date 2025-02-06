@@ -1,47 +1,56 @@
-import argparse
-
 from src.taskmgr import TaskManager
-
-parser = argparse.ArgumentParser(
-    prog="\nCLI Task Manager",
-    description="A simple CLI task manager application",
-    epilog="Enjoy the program! :)",
-)
+from src.args import arg_parser
+import sys
 
 
-parser.add_argument("command", help="Command to execute")
-parser.add_argument("task_num", help="Task to add, update, or delete")
-parser.add_argument("description", help="Description of the task", nargs="?")
+def main():
 
+    args = arg_parser(sys.argv[1:])
+    tm = TaskManager("tasks.json")
 
-args = parser.parse_args()
-
-print(args)
-
-
-exit()
-
-"""
-task-cli add "Buy groceries"
-# Output: Task added successfully (ID: 1)
-
-# Updating and deleting tasks
-task-cli update 1 "Buy groceries and cook dinner"
-task-cli delete 1
-
-# Marking a task as in progress or done
-task-cli mark-in-progress 1
-task-cli mark-done 1
-
-# Listing all tasks
-task-cli list
-
-# Listing tasks by status
-task-cli list done
-task-cli list todo
-task-cli list in-progress
-
-"""
-
-
-tm = TaskManager("tasks.json")
+    match args.command:
+        
+        case "add":
+            nt = tm.add_task(args.description)
+            print(f"Task {nt.id} added: {nt.description}")
+        case "update":
+            nt = tm.update_task(args.task_id, args.description)
+            if nt:
+                print(f"Task {args.task_id} updated successfully")
+            else:
+                print(f"Task {args.task_id} not found")
+            
+        case "delete":
+            dt = tm.delete_task(args.task_id)
+            if dt:
+                print(f"Task {args.task_id} deleted successfully")
+            else:
+                print(f"Task {args.task_id} not found")
+            
+        case "prog":
+            nt = tm.mark_in_progress(args.task_id)
+            if nt:
+                print(f"Task {args.task_id} marked as in-progress")
+            else:
+                print(f"Task {args.task_id} not found")
+                
+        case "done":
+            nt = tm.mark_done(args.task_id)
+            if nt:
+                print(f"Task {args.task_id} marked as done")
+            else:
+                print(f"Task {args.task_id} not found")
+                
+        case "list":
+            tsks = tm.list_tasks(args.status)
+            if not tsks:
+                print("No tasks found")
+            for t in tsks:
+                print(f"{t.id}: {t.description} ({t.status})")
+                
+        case _:
+            print("Invalid command")
+            
+        
+if __name__ == "__main__":
+    main()
