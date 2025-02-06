@@ -21,10 +21,10 @@ class TaskManager:
     def __init__(self, filename):
         self.__filename = filename
         self.tasks = self.load_tasks()
-        
+
     def __len__(self):
         return len(self.tasks)
-    
+
     def __iter__(self):
         return iter(self.tasks)
 

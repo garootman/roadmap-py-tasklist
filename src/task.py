@@ -27,7 +27,6 @@ class Task:
     @property
     def status(self):
         return self._status
-    
 
     @status.setter
     def status(self, value):

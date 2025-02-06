@@ -52,26 +52,26 @@ def test_update_task(taskman):
     task = taskman.add_task(description="Buy groceries")
     task = taskman.update_task(1, "Buy groceries and cook dinner")
     assert task.description == "Buy groceries and cook dinner"
-    
-    
+
+
 def test_update_task_status(taskman):
     task = taskman.add_task(description="Buy groceries")
     task = taskman.mark_in_progress(1)
     assert task.status == "prog"
     task = taskman.get_task(1)
     assert task.status == "prog"
-    
+
     task = taskman.mark_done(1)
     assert task.status == "done"
     task = taskman.get_task(1)
     assert task.status == "done"
-    
+
     new_task = taskman.add_task(description="other task")
     assert new_task.status == "todo"
-    
+
     assert len(taskman) == 2
-    
-    
+
+
 def test_iter_tasks(taskman, manytasks):
     for desc, status in manytasks:
         taskman.add_task(description=desc)
@@ -83,14 +83,15 @@ def test_iter_tasks(taskman, manytasks):
 def test_read_file(taskman, manytasks):
     import json
     import os
+
     for desc, status in manytasks:
         taskman.add_task(description=desc)
         assert os.path.exists("test.json")
         with open("test.json") as f:
             data = json.load(f)
         assert len(taskman) == len(data)
-    
-    
+
+
 def test_list_tasks(taskman, manytasks):
     for desc, status in manytasks:
         nt = taskman.add_task(description=desc)
@@ -102,17 +103,16 @@ def test_list_tasks(taskman, manytasks):
         tt = taskman.get_task(nt_id)
         assert tt.description == desc
         assert tt.status == status
-        
+
     tasks_total = taskman.list_tasks()
     assert len(tasks_total) == len(manytasks)
-    
+
     tasks_todo = taskman.list_tasks(status="todo")
     assert len(tasks_todo) == len([t for t in manytasks if t[1] == "todo"])
-    
+
     tasks_in_progress = taskman.list_tasks(status="prog")
     assert len(tasks_in_progress) == len([t for t in manytasks if t[1] == "prog"])
-    
-    
+
 
 def test_delete_task(taskman):
     nt = taskman.add_task(description="Buy groceries")
