@@ -1,5 +1,7 @@
 # roadmap-py-tasklist
 
+[![Test on any push](https://github.com/garootman/roadmap-py-tasklist/actions/workflows/test_run.yml/badge.svg)](https://github.com/garootman/roadmap-py-tasklist/actions/workflows/test_run.yml)
+
 CLI app to make some tasks in a list due to [roadmap.sh project](https://roadmap.sh/projects/task-tracker)
 
 The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. 
