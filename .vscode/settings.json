@@ -1,0 +1,16 @@
+{
+    "python.testing.pytestArgs": [
+        ".",
+        "-vv",
+        "--capture=no",
+        "--log-cli-level=INFO",
+        "--rootdir=."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.experiments.optOutFrom": ["pythonTestAdapter"],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}"
+    ]
+}
