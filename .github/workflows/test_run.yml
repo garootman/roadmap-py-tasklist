@@ -19,10 +19,7 @@ jobs:
         python-version: '3.12.8'
 
 
-    - name: Run tests with pytest
-      env:
-        PYTHONPATH: ${{ github.workspace }}/src
-      
+    - name: Run tests with pytest      
       run: |
         cd tests/
         pip install pytest
